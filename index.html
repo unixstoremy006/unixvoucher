@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>UnixVoucher | Top Up Game Pantas & Murah</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --primary: #8b5cf6; 
+            --primary-hover: #7c3aed;
+            --secondary: #06b6d4; 
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --whatsapp: #25D366;
+            --danger: #ef4444;
+            --transition: all 0.3s ease;
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+            background: linear-gradient(135deg, var(--primary-hover), #0891b2);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            color: white;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title span { color: var(--secondary); }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            transform: translateX(-50%); width: 60px; height: 4px;
+            background: var(--primary); border-radius: 2px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center; height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px;
+        }
+
+        .logo i { color: var(--primary); font-size: 2rem; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; color: var(--text-muted); transition: var(--transition); }
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: white; cursor: pointer; background: none; border: none; }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 160px 0 100px;
+            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.15), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1), transparent 50%);
+            min-height: 100vh; display: flex; align-items: center;
+        }
+
+        .hero-content {
+            display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 800px; margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero h1 span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; }
+
+        .search-container { width: 100%; max-width: 600px; position: relative; margin-bottom: 30px; }
+        .search-container input {
+            width: 100%; padding: 18px 25px 18px 50px; border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.1); background: rgba(30, 41, 59, 0.8);
+            color: white; font-size: 1.1rem; outline: none; transition: var(--transition);
+        }
+        .search-container input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.2rem; }
+
+        .trust-badges { display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+        .badge {
+            display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .badge i { color: var(--success); }
+
+        /* --- MLBB CHECKER SECTION --- */
+        .checker-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0a0f1f, #030617);
+        }
+        .checker-card {
+            max-width: 900px;
+            margin: auto;
+            padding: 35px 30px;
+            border-radius: 28px;
+            background: rgba(23, 0, 38, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(106, 60, 255, 0.6);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139, 92, 246, 0.2) inset;
+        }
+        .checker-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .checker-header i {
+            font-size: 2.2rem;
+            color: #c084fc;
+            filter: drop-shadow(0 0 6px #a855f7);
+        }
+        .checker-header h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .checker-form {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin: 25px 0 20px;
+        }
+        .input-group-custom {
+            flex: 1;
+            min-width: 180px;
+        }
+        .input-group-custom label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c4a5ff;
+            margin-bottom: 8px;
+        }
+        .input-group-custom input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border: 1.5px solid #4a2a8a;
+            background: #1f0436e6;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.25s;
+            outline: none;
+        }
+        .input-group-custom input:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+            background: #2d0b52;
+        }
+        #checkBtnML {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(95deg, #a855f7, #7c3aed);
+            color: white;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        #checkBtnML:hover {
+            transform: scale(1.02);
+            background: linear-gradient(95deg, #b468ff, #8b4eff);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.6);
+        }
+        .result-panel-ml {
+            margin-top: 28px;
+            border-radius: 24px;
+            background: rgba(10, 2, 30, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #6a3cff;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            display: none;
+        }
+        .result-panel-ml.show {
+            display: block;
+            animation: floatReveal 0.6s ease-out forwards;
+        }
+        @keyframes floatReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(0.94); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .result-header-ml {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.8rem;
+            background: linear-gradient(120deg, #1c0438, #2a0f55);
+            border-bottom: 1px solid #8a5cf6;
+        }
+        .result-header-ml h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #eedbff;
+        }
+        .live-badge-ml {
+            background: #7c3aed;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            animation: pulseLive 1.8s infinite;
+        }
+        @keyframes pulseLive {
+            0% { opacity: 0.7; box-shadow: 0 0 0 0 #b77cff; }
+            70% { opacity: 1; box-shadow: 0 0 0 8px rgba(183, 124, 255, 0); }
+            100% { opacity: 0.9; box-shadow: 0 0 0 0 rgba(183, 124, 255, 0); }
+        }
+        .result-grid-ml {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            padding: 1.8rem;
+        }
+        .info-card-ml {
+            background: #250843a8;
+            border-radius: 20px;
+            padding: 1rem 1.4rem;
+            border-left: 5px solid #a855f7;
+        }
+        .label-ml {
+            color: #bda9f0;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .value-ml {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #f1e5ff;
+            word-break: break-word;
+        }
+        .topup-ml-section {
+            padding: 0.5rem 1.8rem 1.8rem;
+            border-top: 1px dashed #7e57d4;
+        }
+        .bonus-item-ml {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .bonus-status-ml {
+            background: #2e7d32;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* --- GAMES SECTION --- */
+        .games { padding: 80px 0; background-color: var(--bg-darker); }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-top: 40px; }
+
+        .game-card {
+            background-color: var(--bg-card); border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition);
+            cursor: pointer; position: relative; display: flex; flex-direction: column;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-img { width: 100%; height: 280px; object-fit: cover; border-bottom: 2px solid var(--primary); }
+        .game-info { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .game-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
+        .game-publisher { font-size: 0.85rem; color: var(--text-muted); }
+
+        .hot-tag {
+            position: absolute; top: 10px; right: 10px; background: var(--danger); color: white;
+            padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+        }
+
+        /* --- MODAL / ORDER FORM --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(5px);
+            z-index: 2000; display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease; padding: 20px;
+        }
+
+        .modal-overlay.active { display: flex; opacity: 1; }
+
+        .modal-content {
+            background: var(--bg-card); width: 100%; max-width: 600px;
+            border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+            max-height: 90vh; display: flex; flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px); transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+
+        .modal-header {
+            padding: 20px 25px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.02); border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header h2 { font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+        .modal-header h2 img { width: 30px; height: 30px; border-radius: 6px; }
+        
+        .close-btn {
+            background: none; border: none; color: var(--text-muted);
+            font-size: 1.5rem; cursor: pointer; transition: var(--transition);
+        }
+        .close-btn:hover { color: var(--danger); transform: scale(1.1); }
+
+        .modal-body {
+            padding: 25px; overflow-y: auto; flex-grow: 1;
+        }
+        
+        .modal-body::-webkit-scrollbar { width: 6px; }
+        .modal-body::-webkit-scrollbar-track { background: var(--bg-dark); }
+        .modal-body::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .form-section-title {
+            font-size: 1rem; font-weight: 600; color: var(--secondary);
+            margin-bottom: 15px; display: flex; align-items: center; gap: 8px;
+        }
+
+        .input-group {
+            display: grid; gap: 15px; margin-bottom: 30px;
+        }
+        .input-group.two-cols { grid-template-columns: 2fr 1fr; }
+
+        .input-field {
+            background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px 15px; border-radius: 8px; color: white; width: 100%;
+            font-size: 0.95rem; outline: none; transition: var(--transition);
+        }
+        .input-field:focus { border-color: var(--primary); }
+
+        .package-category { margin-bottom: 25px; }
+        .package-category-title {
+            font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;
+            text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+        }
+
+        .package-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+        }
+
+        .package-item {
+            background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.08);
+            padding: 15px; border-radius: 10px; cursor: pointer;
+            transition: var(--transition); text-align: center;
+        }
+        .package-item:hover { background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.5); }
+        
+        .package-item.selected {
+            background: rgba(139, 92, 246, 0.15); border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+        }
+
+        .pkg-name { font-weight: 700; margin-bottom: 5px; color: white; font-size: 1rem; }
+        .pkg-price { color: var(--secondary); font-size: 0.9rem; font-weight: 500; }
+
+        .modal-footer {
+            padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02); border-radius: 0 0 20px 20px;
+        }
+
+        .error-text { color: #ff4444; font-size: 0.85rem; margin-top: 5px; display: none; }
+
+        /* --- HOW IT WORKS --- */
+        .how-it-works { padding: 80px 0; background-color: var(--bg-dark); }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .step-card { text-align: center; padding: 30px 20px; background: var(--bg-card); border-radius: 16px; position: relative; }
+        .step-icon { width: 70px; height: 70px; background: rgba(139, 92, 246, 0.1); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 20px; border: 2px solid rgba(139, 92, 246, 0.3); }
+        .step-number { position: absolute; top: -15px; right: -15px; width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; border: 4px solid var(--bg-dark); }
+        
+        footer { background-color: #0b1120; padding: 40px 0 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted); font-size: 0.85rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.8rem; }
+            .steps-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute; top: 80px; left: -100%; width: 100%;
+                background: var(--bg-card); flex-direction: column; padding: 20px;
+                text-align: center; transition: var(--transition);
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.active { left: 0; }
+            .mobile-menu-btn { display: block; }
+            .nav-actions { display: none; }
+            .nav-actions.mobile-visible { display: flex; margin-top: 15px; justify-content: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 120px 0 60px; }
+            .package-grid { grid-template-columns: 1fr; }
+            .checker-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><i class="fa-solid fa-gamepad"></i> UnixVoucher</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Laman Utama</a></li>
+                    <li><a href="#checker">MLBB Checker</a></li>
+                    <li><a href="#games">Semua Game</a></li>
+                    <li><a href="#cara-beli">Cara Beli</a></li>
+                    <li class="nav-actions mobile-visible"><button class="btn btn-primary">Log Masuk</button></li>
+                </ul>
+                <div class="nav-actions"><button class="btn btn-primary">Log Masuk / Daftar</button></div>
+                <button class="mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Top Up Game Kegemaran Anda <span>Sepantas Kilat!</span></h1>
+                <p>Platform nombor 1 di Malaysia untuk tambah nilai UC, Diamond, Valorant Points dan pelbagai lagi. Harga termurah, transaksi selamat & jaminan masuk 100%.</p>
+                <div class="search-container">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari game anda di sini... cth: PUBG">
+                </div>
+                <div class="trust-badges">
+                    <div class="badge"><i class="fa-solid fa-bolt"></i> Proses < 5 Minit</div>
+                    <div class="badge"><i class="fa-solid fa-shield-halved"></i> 100% Selamat</div>
+                    <div class="badge"><i class="fa-solid fa-headset"></i> Sokongan 24/7</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MLBB CHECKER SECTION -->
+    <section class="checker-section" id="checker">
+        <div class="container">
+            <div class="checker-card">
+                <div class="checker-header">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <h2>MLBB Checker</h2>
+                </div>
+                <div class="checker-form">
+                    <div class="input-group-custom">
+                        <label>🎮 User ID</label>
+                        <input type="text" id="userId" placeholder="12345678" autocomplete="off">
+                    </div>
+                    <div class="input-group-custom">
+                        <label>🌐 Server ID</label>
+                        <input type="text" id="zoneId" placeholder="1234" autocomplete="off">
+                    </div>
+                    <div class="input-group-custom" style="min-width: 140px; flex: 0.4;">
+                        <label>&nbsp;</label>
+                        <button id="checkBtnML"><i class="fa-solid fa-bolt"></i> Check ID</button>
+                    </div>
+                </div>
+                
+                <div id="resultBoxML" class="result-panel-ml">
+                    <div class="result-header-ml">
+                        <h3>✅ Search Results</h3>
+                        <span class="live-badge-ml">Live Data</span>
+                    </div>
+                    <div class="result-grid-ml">
+                        <div class="info-card-ml">
+                            <span class="label-ml">🎮 Nickname</span>
+                            <div class="value-ml" id="nicknameML">—</div>
+                        </div>
+                        <div class="info-card-ml">
+                            <span class="label-ml">📍 Region</span>
+                            <div class="value-ml" id="regionML">—</div>
+                        </div>
+                        <div class="info-card-ml">
+                            <span class="label-ml">🆔 ID & Server</span>
+                            <div class="value-ml" id="useridzoneML">—</div>
+                        </div>
+                    </div>
+                    <div class="topup-ml-section">
+                        <h4 style="color:#cfaaff; margin-bottom:12px;"><i class="fa-solid fa-gift"></i> 🎁 First Topup Bonus</h4>
+                        <div id="firstTopupListML"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GAMES SECTION -->
+    <section class="games" id="games">
+        <div class="container">
+            <h2 class="section-title">Trending <span>Games</span></h2>
+            
+            <div class="game-grid" id="gameGrid">
+                <!-- Mobile Legends -->
+                <div class="game-card" data-title="mobile legends bang bang mlbb" onclick="openOrderModal('mlbb')">
+                    <div class="hot-tag">HOT</div>
+                    <img src="https://cdn.jsdelivr.net/gh/unixstoremy006/myimage/IMG_20260530_164328.png" alt="Mobile Legends" class="game-img">
+                    <div class="game-info">
+                        <div class="game-title">Mobile Legends</div>
+                        <div class="game-publisher">Moonton</div>
+                    </div>
+                </div>
+
+                <!-- PUBG Mobile -->
+                <div class="game-card" data-title="pubg mobile uc tencent" onclick="openOrderModal('pubgm')">
+                    <div class="hot-tag">HOT</div>
+                    <img src="https://cdn.jsdelivr.net/gh/unixstoremy006/myimage/IMG_20260530_164403.png" alt="PUBG Mobile" class="game-img">
+                    <div class="game-info">
+                        <div class="game-title">PUBG Mobile</div>
+                        <div class="game-publisher">Tencent Games</div>
+                    </div>
+                </div>
+
+                <!-- Free Fire -->
+                <div class="game-card" data-title="free fire ff garena diamond" onclick="openOrderModal('freefire')">
+                    <img src="https://cdn.jsdelivr.net/gh/unixstoremy006/myimage/IMG_20260530_164212.png" class="game-img">
+                    <div class="game-info">
+                        <div class="game-title">Free Fire</div>
+                        <div class="game-publisher">Garena</div>
+                    </div>
+                </div>
+
+                <!-- Valorant -->
+                <div class="game-card" data-title="valorant vp riot" onclick="openOrderModal('valorant')">
+                    <img src="https://cdn.jsdelivr.net/gh/unixstoremy006/myimage/IMG_20260530_164243.png" class="game-img">
+                    <div class="game-info">
+                        <div class="game-title">Valorant</div>
+                        <div class="game-publisher">Riot Games</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORDER MODAL -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fa-solid fa-gamepad"></i> Game Title</h2>
+                <button class="close-btn" onclick="closeOrderModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-section-title">
+                    <div class="step-number" style="position:static; width:25px; height:25px; font-size:0.9rem; margin:0">1</div> 
+                    Masukkan Butiran Akaun
+                </div>
+                
+                <div class="input-group" id="accountFields"></div>
+                <div id="accountError" class="error-text">Sila lengkapkan butiran akaun.</div>
+
+                <hr style="border:0; border-top: 1px solid rgba(255,255,255,0.05); margin: 25px 0;">
+
+                <div class="form-section-title">
+                    <div class="step-number" style="position:static; width:25px; height:25px; font-size:0.9rem; margin:0">2</div> 
+                    Pilih Item / Pakej
+                </div>
+
+                <div id="packageContainer"></div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-whatsapp" id="btnSubmit" onclick="submitOrder()">
+                    <i class="fa-brands fa-whatsapp"></i> Beli Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works" id="cara-beli">
+        <div class="container">
+            <h2 class="section-title">Cara Pembelian <span>Mudah</span></h2>
+            <div class="steps-grid">
+                <div class="step-card"><div class="step-number">1</div><div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h3>Pilih Game</h3><p>Pilih game kegemaran anda dari senarai kami.</p></div>
+                <div class="step-card"><div class="step-number">2</div><div class="step-icon"><i class="fa-solid fa-id-card"></i></div><h3>Masukkan ID</h3><p>Isi ID Pemain untuk akaun game anda.</p></div>
+                <div class="step-card"><div class="step-number">3</div><div class="step-icon"><i class="fa-solid fa-cart-shopping"></i></div><h3>Pilih Pakej</h3><p>Pilih jumlah diamond/UC yang dikehendaki.</p></div>
+                <div class="step-card"><div class="step-number">4</div><div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div><h3>Sahkan di WhatsApp</h3><p>Terus WhatsApp admin untuk pembayaran & proses.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">&copy; 2026 UnixVoucher. Hak Cipta Terpelihara.</div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- DATA GAMES DAN PAKEJ (UPDATED dengan data baru) ---
+        const gamesDB = {
+            mlbb: {
+                title: "Mobile Legends",
+                fields: [
+                    { id: 'orderUserId', label: 'User ID', placeholder: 'Cth: 12345678', type: 'text' },
+                    { id: 'orderServerId', label: 'Server ID', placeholder: 'Cth: 1234', type: 'text' }
+                ],
+                categories: [
+                    {
+                        name: "Package A",
+                        items: [
+                            { name: "14💎", price: "RM1.00" },
+                            { name: "42💎", price: "RM3.00" },
+                            { name: "55💎", price: "RM3.99" },
+                            { name: "70💎", price: "RM4.98" },
+                            { name: "140💎", price: "RM9.96" },
+                            { name: "165💎", price: "RM11.84" },
+                            { name: "275💎", price: "RM19.72" },
+                            { name: "284💎", price: "RM19.78" },
+                            { name: "355💎", price: "RM24.95" },
+                            { name: "429💎", price: "RM29.93" },
+                            { name: "565💎", price: "RM40.11" },
+                            { name: "716💎", price: "RM49.87" },
+                            { name: "1084💎", price: "RM74.61" },
+                            { name: "1446💎", price: "RM97.81" },
+                            { name: "2976💎", price: "RM199.12" },
+                            { name: "7502💎", price: "RM487.21" },
+                            { name: "Weekly Diamond Pass", price: "RM8.60" }
+                        ]
+                    },
+                    {
+                        name: "Package B",
+                        items: [
+                            { name: "571💎", price: "RM39.18" },
+                            { name: "1192💎", price: "RM78.33" },
+                            { name: "1788💎", price: "RM117.53" },
+                            { name: "3005💎", price: "RM195.87" },
+                            { name: "3606💎", price: "RM235.06" },
+                            { name: "4810💎", price: "RM313.41" },
+                            { name: "6012💎", price: "RM391.78" }
+                        ]
+                    }
+                ]
+            },
+            pubgm: {
+                title: "PUBG Mobile (Malaysia)",
+                fields: [
+                    { id: 'orderPubgId', label: 'User ID', placeholder: 'Cth: 5123456789', type: 'text' }
+                ],
+                categories: [
+                    {
+                        name: "Top Up UC & Packs",
+                        items: [
+                            { name: "First Purchase Pack", price: "RM3.67" },
+                            { name: "Prime (1 Month)", price: "RM3.67" },
+                            { name: "Weekly Deal Pack 1", price: "RM3.75" },
+                            { name: "60 UC", price: "RM3.81" },
+                            { name: "Upgradable Firearm Materials", price: "RM11.02" },
+                            { name: "Weekly Deal Pack 2", price: "RM11.22" },
+                            { name: "Weekly Mythic Emblem", price: "RM13.79" },
+                            { name: "Mythic Emblem Pack", price: "RM18.38" },
+                            { name: "325 UC", price: "RM19.08" },
+                            { name: "Elite Pass LV1-50", price: "RM20.69" },
+                            { name: "Prime (6 Months)", price: "RM22.06" },
+                            { name: "Prime Plus (1 Month)", price: "RM36.78" },
+                            { name: "660 UC", price: "RM38.16" },
+                            { name: "Elite Pass LV1-100", price: "RM41.37" },
+                            { name: "Prime (12 Months)", price: "RM44.12" },
+                            { name: "1800 UC", price: "RM95.39" },
+                            { name: "3850 UC", price: "RM190.74" },
+                            { name: "8100 UC", price: "RM381.51" }
+                        ]
+                    }
+                ]
+            },
+            freefire: {
+                title: "Free Fire MY/SG",
+                fields: [
+                    { id: 'orderFfId', label: 'User ID', placeholder: 'Cth: 123456789', type: 'text' }
+                ],
+                categories: [
+                    {
+                        name: "Diamonds",
+                        items: [
+                            { name: "25💎", price: "RM1.10" },
+                            { name: "Weekly Lite", price: "RM1.18" },
+                            { name: "Level Up Package - Level 6", price: "RM1.34" },
+                            { name: "Evo Access 3D", price: "RM2.34" },
+                            { name: "Level Up Package - Level 10", price: "RM2.87" },
+                            { name: "Level Up Package - Level 15", price: "RM2.87" },
+                            { name: "Level Up Package - Level 20", price: "RM2.87" },
+                            { name: "Level Up Package - Level 25", price: "RM2.87" },
+                            { name: "Evo Access 7D", price: "RM3.52" },
+                            { name: "100💎", price: "RM3.63" },
+                            { name: "Level Up Package - Level 30", price: "RM4.22" },
+                            { name: "Weekly Membership 🇲🇾", price: "RM7.15" },
+                            { name: "Evo Access 30D", price: "RM9.25" },
+                            { name: "310💎", price: "RM10.94" },
+                            { name: "520💎", price: "RM16.85" },
+                            { name: "Monthly Membership", price: "RM33.59" },
+                            { name: "1060💎", price: "RM33.67" },
+                            { name: "2180💎", price: "RM68.60" },
+                            { name: "5600💎", price: "RM164.14" },
+                            { name: "11500💎", price: "RM332.52" }
+                        ]
+                    }
+                ]
+            },
+            valorant: {
+                title: "Valorant PC",
+                fields: [
+                    { id: 'orderValorantId', label: 'Riot ID', placeholder: 'Cth: Nama#TAG', type: 'text' }
+                ],
+                categories: [
+                    {
+                        name: "Valorant Points (VP)",
+                        items: [
+                            { name: "475 Valorant Points", price: "RM17.03" },
+                            { name: "1000 Valorant Points", price: "RM35.03" },
+                            { name: "2050 Valorant Points", price: "RM68.35" },
+                            { name: "3650 Valorant Points", price: "RM119.33" },
+                            { name: "5350 Valorant Points", price: "RM170.20" },
+                            { name: "11000 Valorant Points", price: "RM341.22" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // --- GLOBAL VARIABLES ---
+        let currentGameId = null;
+        let selectedPackage = null;
+        const ADMIN_WHATSAPP = "60105707500";
+
+        // ========== MLBB CHECKER API ==========
+        const checkBtn = document.getElementById('checkBtnML');
+        const userIdInput = document.getElementById('userId');
+        const zoneIdInput = document.getElementById('zoneId');
+        const resultDiv = document.getElementById('resultBoxML');
+        const nicknameSpan = document.getElementById('nicknameML');
+        const regionSpan = document.getElementById('regionML');
+        const useridzoneSpan = document.getElementById('useridzoneML');
+        const bonusListDiv = document.getElementById('firstTopupListML');
+
+        function showAnimatedResult() {
+            resultDiv.style.display = 'block';
+            resultDiv.classList.remove('show');
+            void resultDiv.offsetWidth;
+            resultDiv.classList.add('show');
+        }
+
+        function hideResult() {
+            resultDiv.classList.remove('show');
+            resultDiv.style.display = 'none';
+        }
+
+        function setLoadingState(loading) {
+            if (loading) {
+                checkBtn.innerHTML = '<i class="fa-solid fa-spinner fa-pulse"></i> Checking...';
+                checkBtn.disabled = true;
+            } else {
+                checkBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> Check ID';
+                checkBtn.disabled = false;
+            }
+        }
+
+        if (checkBtn) {
+            checkBtn.addEventListener('click', async () => {
+                const userId = userIdInput?.value.trim();
+                const zoneId = zoneIdInput?.value.trim();
+
+                if (!userId || !zoneId) {
+                    alert('⚠️ Sila masukkan User ID dan Zone ID dengan betul!');
+                    return;
+                }
+                if (!/^\d+$/.test(userId) || !/^\d+$/.test(zoneId)) {
+                    alert('User ID dan Zone ID hanya boleh mengandungi nombor.');
+                    return;
+                }
+
+                setLoadingState(true);
+                hideResult();
+
+                try {
+                    const response = await fetch(`https://unixapi.my.id/api/validasi/mlbb/unixdd?userId=${userId}&serverId=${zoneId}&apikey=muhdamzar95`);
+                    const json = await response.json();
+
+                    if (!json.status || !json.data) {
+                        alert('❌ ID tidak dijumpai. Pastikan User ID & Zone ID betul.');
+                        setLoadingState(false);
+                        return;
+                    }
+
+                    const data = json.data;
+                    if (nicknameSpan) nicknameSpan.innerText = data.nickname || 'Unknown';
+                    if (regionSpan) regionSpan.innerText = `${data.country_flag || '🏳️'} ${data.region || 'Global'}`;
+                    if (useridzoneSpan) useridzoneSpan.innerText = `${data.userid || userId} (${data.zoneid || zoneId})`;
+
+                    let bonusHtml = '';
+                    if (data.first_topup && Array.isArray(data.first_topup) && data.first_topup.length) {
+                        data.first_topup.forEach(item => {
+                            bonusHtml += `<div class="bonus-item-ml"><span>💎 ${item.denom}</span><span class="bonus-status-ml">${item.status}</span></div>`;
+                        });
+                    } else {
+                        bonusHtml = '<div class="bonus-item-ml"><span>No bonus data</span><span class="bonus-status-ml">—</span></div>';
+                    }
+                    if (bonusListDiv) bonusListDiv.innerHTML = bonusHtml;
+
+                    showAnimatedResult();
+                } catch (err) {
+                    console.error(err);
+                    alert('⚠️ Gagal menghubungi server. Sila cuba sebentar lagi.');
+                } finally {
+                    setLoadingState(false);
+                }
+            });
+        }
+
+        // ========== MODAL FUNCTIONS ==========
+        function openOrderModal(gameId) {
+            const game = gamesDB[gameId];
+            if(!game) return;
+
+            currentGameId = gameId;
+            selectedPackage = null;
+
+            document.getElementById('modalTitle').innerHTML = `<i class="fa-solid fa-gamepad"></i> ${game.title}`;
+            const accountFields = document.getElementById('accountFields');
+            accountFields.innerHTML = '';
+            
+            if(game.fields.length === 2) accountFields.className = 'input-group two-cols';
+            else accountFields.className = 'input-group';
+
+            game.fields.forEach(field => {
+                accountFields.innerHTML += `
+                    <div>
+                        <input type="${field.type}" id="${field.id}" class="input-field" placeholder="${field.placeholder}" required>
+                        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:5px; margin-left:5px;">Sila masukkan ${field.label}</div>
+                    </div>
+                `;
+            });
+
+            const packageContainer = document.getElementById('packageContainer');
+            packageContainer.innerHTML = '';
+
+            game.categories.forEach((cat, catIndex) => {
+                let categoryHTML = `<div class="package-category">`;
+                if(game.categories.length > 1) {
+                    categoryHTML += `<div class="package-category-title">${cat.name}</div>`;
+                }
+                
+                categoryHTML += `<div class="package-grid">`;
+                
+                cat.items.forEach((item, itemIndex) => {
+                    const safeName = item.name.replace(/"/g, '&quot;');
+                    categoryHTML += `
+                        <div class="package-item" onclick="selectPackage(this, '${safeName}', '${item.price}')">
+                            <div class="pkg-name">${item.name}</div>
+                            <div class="pkg-price">${item.price}</div>
+                        </div>
+                    `;
+                });
+                
+                categoryHTML += `</div></div>`;
+                packageContainer.innerHTML += categoryHTML;
+            });
+
+            document.getElementById('accountError').style.display = 'none';
+            document.getElementById('btnSubmit').disabled = true;
+            document.getElementById('btnSubmit').innerHTML = '<i class="fa-brands fa-whatsapp"></i> Sila Pilih Pakej';
+
+            const modal = document.getElementById('orderModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        function selectPackage(element, name, price) {
+            document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedPackage = { name, price };
+
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Beli Sekarang (${price})`;
+        }
+
+        function submitOrder() {
+    const game = gamesDB[currentGameId];
+    let isValid = true;
+    let orderDetails = `*PESANAN BARU UNIXVOUCHER*%0A%0A`;
+    orderDetails += `🎮 *Game:* ${game.title}%0A`;
+
+    game.fields.forEach(field => {
+        const inputElement = document.getElementById(field.id);
+        if(!inputElement || !inputElement.value.trim()) {
+            isValid = false;
+            if(inputElement) inputElement.style.borderColor = 'var(--danger)';
+        } else {
+            inputElement.style.borderColor = 'rgba(255,255,255,0.1)';
+            orderDetails += `👤 *${field.label}:* ${inputElement.value.trim()}%0A`;
+        }
+    });
+
+    const errorMsg = document.getElementById('accountError');
+    if(!isValid) {
+        errorMsg.style.display = 'block';
+        return; // Hentikan proses, tidak hantar ke WhatsApp
+    } else {
+        errorMsg.style.display = 'none';
+    }
+
+    if(!selectedPackage) return;
+
+    orderDetails += `💎 *Pakej:* ${selectedPackage.name}%0A`;
+    orderDetails += `💰 *Harga:* ${selectedPackage.price}%0A%0A`;
+    orderDetails += `Sila semak butiran pesanan saya.`;
+
+    const whatsappUrl = `https://wa.me/${ADMIN_WHATSAPP}?text=${orderDetails}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+        // ========== DOM READY & UTILITIES ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase().trim();
+                    document.querySelectorAll('.game-card').forEach(card => {
+                        const title = card.getAttribute('data-title')?.toLowerCase() || '';
+                        card.style.display = title.includes(term) ? 'flex' : 'none';
+                    });
+                });
+            }
+            const modal = document.getElementById('orderModal');
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if(e.target.id === 'orderModal') closeOrderModal();
+                });
+            }
+
+            const mobileBtn = document.getElementById('mobileBtn');
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', function() {
+                    document.getElementById('navLinks').classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
